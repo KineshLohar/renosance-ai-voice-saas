@@ -31,7 +31,7 @@ enum VoiceCategory {
   CORPORATE
 }
 
-model voice {
+model Voice {
   id String @id @default(cuid())
 
   orgId String?
@@ -42,6 +42,8 @@ model voice {
   language String @default("en-US")
   variant VoiceVariant
   r2ObjectKey String?
+
+  generations Generation[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,4 +59,19 @@ model Generation {
   orgId String
 
   voiceId String?
+  voice Voice? @relation(fields: [voiceId], references: [id], onDelete: SetNull)
+
+  voiceName String
+  text String
+  r2ObjectKey String?
+  temperature Float
+  topP Float
+  topK Int
+  repetitionPenalty Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orgId])
+  @@index([voiceId])
 }
