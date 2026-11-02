@@ -1,14 +1,13 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useTypedAppFormContext } from "@/hooks/use-app-form";
 import { useSelector } from "@tanstack/react-form";
 import { Coins } from "lucide-react";
 import { COST_PER_UNIT, TEXT_MAX_LENGTH } from "../data/constants";
-import { ttsFormOptions } from "./text-to-speech-form";
 import { GenerateButton } from "./generate-button";
+import { ttsFormOptions } from "./text-to-speech-form";
 
 
 export const TextInputPanel = () => {
