@@ -94,7 +94,7 @@ export const VoiceSelector = () => {
                                                 name={v.name}
                                             />
                                             <span className=" truncate text-sm font-medium tracking-tight">
-                                                {currentVoice.name} - {VOICE_CATEGORY_LABELS[v.category]}
+                                                {v.name} - {VOICE_CATEGORY_LABELS[v.category]}
 
                                             </span>
                                         </SelectItem>
@@ -111,14 +111,14 @@ export const VoiceSelector = () => {
                             <SelectGroup>
                                 <SelectLabel>Built-In Voices</SelectLabel>
                                 {
-                                    customVoices.map(v => (
+                                    systemVoices.map(v => (
                                         <SelectItem key={v.id} value={v.id}>
                                             <VoiceAvatar
                                                 seed={v.id}
                                                 name={v.name}
                                             />
                                             <span className=" truncate text-sm font-medium tracking-tight">
-                                                {currentVoice.name} - {VOICE_CATEGORY_LABELS[v.category]}
+                                                {v.name} - {VOICE_CATEGORY_LABELS[v.category]}
 
                                             </span>
                                         </SelectItem>

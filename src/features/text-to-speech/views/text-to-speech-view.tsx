@@ -5,6 +5,7 @@ import { TextInputPanel } from "../components/text-input-panel"
 import { defaultTTSValues, TextToSpeechForm, TTSFormValues } from "../components/text-to-speech-form";
 import { VoicePreviewPlaceholder } from "../components/voice-preview-placeholder"
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { TTSVoicesProvider } from "../contexts/tts-voices-context";
 
 
 
@@ -25,17 +26,25 @@ export const TextToSpeechView = ({ initialValues }: {
         initialValues.voiceId &&
             allVoices?.some(v => v.id === initialValues?.voiceId)
             ? initialValues.voiceId
-            : fallbackVoiceId
+            : fallbackVoiceId;
+
+    const defaultValues: TTSFormValues = {
+        ...defaultTTSValues,
+        ...initialValues,
+        voiceId: resolvedVoiceId
+    }
 
     return (
-        <TextToSpeechForm defaultValues={defaultTTSValues}>
-            <div className='flex min-h-0 flex-1 overflow-hidden'>
-                <div className='flex min-h-0 flex-1 flex-col'>
-                    <TextInputPanel />
-                    <VoicePreviewPlaceholder />
+        <TTSVoicesProvider value={{ customVoices, systemVoices, allVoices }}>
+            <TextToSpeechForm defaultValues={defaultValues}>
+                <div className='flex min-h-0 flex-1 overflow-hidden'>
+                    <div className='flex min-h-0 flex-1 flex-col'>
+                        <TextInputPanel />
+                        <VoicePreviewPlaceholder />
+                    </div>
+                    <SettingsPanel />
                 </div>
-                <SettingsPanel />
-            </div>
-        </TextToSpeechForm>
+            </TextToSpeechForm>
+        </TTSVoicesProvider>
     )
 }
